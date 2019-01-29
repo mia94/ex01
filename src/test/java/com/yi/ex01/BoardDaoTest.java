@@ -80,6 +80,12 @@ public class BoardDaoTest {
 		cri.setPerPageNum(20);
 		dao.listCriteria(cri);
 	}
+	
+	@Test
+	public void test08totalCount() {
+		int res = dao.totalCount();
+		System.out.println(res);
+	}
 }
 
 

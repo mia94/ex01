@@ -46,7 +46,7 @@ public class BoardController {
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(1024);
+		pageMaker.setTotalCount(service.totalCount());
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", pageMaker);
@@ -118,7 +118,7 @@ public class BoardController {
 		logger.info("modify ---------- post2");
 		service.modify(vo);
 		logger.info("페이지번호"+cri.getPage()+"");
-		return "redirect:/board/listPage?page="+cri.getPage();
+		return "redirect:/board/readPage?page="+cri.getPage()+"&bno="+vo.getBno();
 	}
 	
 }

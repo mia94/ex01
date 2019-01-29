@@ -52,7 +52,62 @@
 		order by bno desc
 		limit #{pageStart}, #{perPageNum}
 	 </select>
+	 
+	 <select id="totalCount" resultType="int">
+	 	select count(bno) from tbl_board
+	 </select>
+	 
+	 <sql id="search">
+	 	<if test="searchType=='t'.toString()">
+	 		where title like concat('%',#{keyword},'%')
+	 	</if>
+	 	<if test="searchType=='c'.toString()">
+	 		where content like concat('%',#{keyword},'%')
+	 	</if>
+	 	<if test="searchType=='w'.toString()">
+	 		where writer like concat('%',#{keyword},'%')
+	 	</if>
+	 	<if test="searchType=='tc'.toString()">
+	 		where title like concat('%',#{keyword},'%') OR content like concat('%',#{keyword},'%')
+	 	</if>
+	 	<if test="searchType=='cw'.toString()">
+	 		where content like concat('%',#{keyword},'%') OR writer like concat('%',#{keyword},'%')
+	 	</if>
+	 	<if test="searchType=='tcw'.toString()">
+	 		where title like concat('%',#{keyword},'%')
+	 		OR content like concat('%',#{keyword},'%') 
+	 		OR writer like concat('%',#{keyword},'%')
+	 	</if>
+	 </sql>
+	 
+	 <select id="listSearch" resultType="BoardVO">
+	 	SELECT bno, title, content, writer, regdate, viewcnt
+		FROM tbl_board
+		<include refid="search"></include>
+		order by bno desc
+		limit #{pageStart}, #{perPageNum}
+	 </select>
+	 
+	 <select id="searchTotalCount" resultType="int">
+	 	select count(bno) from tbl_board
+	 	<include refid="search"></include>
+	 </select>
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
