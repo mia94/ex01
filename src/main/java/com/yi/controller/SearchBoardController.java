@@ -74,6 +74,25 @@ public class SearchBoardController {
 		return "redirect:/sboard/list?page="+cri.getPage()+"&searchType="+cri.getSearchType()+"&keyword="+cri.getKeyword();
 	}
 	
+	@RequestMapping(value="modify", method=RequestMethod.GET)
+	public void modifyGet(@RequestParam("bno") int bno,SearchCriteria cri,Model model) {
+		logger.info("modify ---------- get");
+		BoardVO vo = service.read(bno);
+		model.addAttribute("cri", cri);
+		model.addAttribute("boardVO", vo);
+		logger.info("수정 전 페이지번호"+cri.getPage()+"키워드"+cri.getSearchType()+cri.getKeyword());
+	}
+	
+	@RequestMapping(value="modifyPage", method=RequestMethod.POST)
+	public String modifyPostPage(BoardVO vo,SearchCriteria cri,Model model) {
+		logger.info("modify ---------- post2");
+		service.modify(vo);
+		logger.info("수정 전 페이지번호"+cri.getPage()+"키워드"+cri.getSearchType()+cri.getKeyword());
+		model.addAttribute("cri", cri);
+		model.addAttribute("boardVO", vo);
+		return "redirect:/sboard/readPage?page="+cri.getPage()+"&bno="+vo.getBno()+"&searchType="+cri.getSearchType()+"&keyword="+cri.getKeyword();
+	}
+	
 }
 
 
