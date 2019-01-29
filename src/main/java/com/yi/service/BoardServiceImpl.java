@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yi.domain.BoardVO;
+import com.yi.domain.Criteria;
 import com.yi.persistence.BoardDao;
 
 @Service
@@ -49,6 +50,12 @@ public class BoardServiceImpl implements BoardService {//서비스는@Service달기, D
 		// TODO Auto-generated method stub
 		dao.viewCount(bno);
 		
+	}
+
+	@Override
+	public List<BoardVO> listCriteria(Criteria cri) {
+		// TODO Auto-generated method stub
+		return dao.listCriteria(cri);
 	}
 
 }

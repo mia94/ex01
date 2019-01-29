@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yi.domain.BoardVO;
+import com.yi.domain.Criteria;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -51,6 +52,22 @@ public class BoardDaoImpl implements BoardDao {
 	public void viewCount(int bno) {
 		// TODO Auto-generated method stub
 		sqlSession.update(namespace+".viewCount",bno);
+	}
+
+	@Override
+	public List<BoardVO> listPage(int page) {
+		// TODO Auto-generated method stub
+		if(page < 0) {
+			page = 1;
+		}
+		page = (page -1) * 10;
+		return sqlSession.selectList(namespace+".listPage", page);
+	}
+
+	@Override
+	public List<BoardVO> listCriteria(Criteria cri) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".listCriteria", cri);
 	}
 
 }

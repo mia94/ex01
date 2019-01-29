@@ -3,6 +3,7 @@ package com.yi.persistence;
 import java.util.List;
 
 import com.yi.domain.BoardVO;
+import com.yi.domain.Criteria;
 
 public interface BoardDao {
 	
@@ -13,4 +14,8 @@ public interface BoardDao {
 	public List<BoardVO> listAll();
 	
 	public void viewCount(int bno);
+	
+	//ÆäÀÌÂ¡
+	public List<BoardVO> listPage(int page);
+	public List<BoardVO> listCriteria(Criteria cri);
 }

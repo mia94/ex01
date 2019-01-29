@@ -38,6 +38,20 @@
 		SET viewcnt=viewcnt+1
 		WHERE bno=#{bno}
 	 </update>
+	 
+	 <select id="listPage" resultType="BoardVO">
+	 	SELECT bno, title, content, writer, regdate, viewcnt
+		FROM tbl_board
+		order by bno desc
+		limit #{page}, 10
+	 </select>
+	 
+	 <select id="listCriteria" resultType="BoardVO">
+	 	SELECT bno, title, content, writer, regdate, viewcnt
+		FROM tbl_board
+		order by bno desc
+		limit #{pageStart}, #{perPageNum}
+	 </select>
 </mapper>
 
 

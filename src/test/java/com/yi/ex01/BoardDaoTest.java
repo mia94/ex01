@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.yi.domain.BoardVO;
+import com.yi.domain.Criteria;
 import com.yi.persistence.BoardDao;
 
 
@@ -30,7 +31,7 @@ public class BoardDaoTest {
 	public void delete(int bno);
 	public List<BoardVO> listAll();
 	 * */
-	@Test
+	//@Test
 	public void test01insert() {
 		BoardVO vo = new BoardVO();
 		vo.setTitle("HELLO");
@@ -39,14 +40,14 @@ public class BoardDaoTest {
 		dao.insert(vo);
 	}
 	
-	@Test
+	//@Test
 	public void test02read() {
 		BoardVO vo = new BoardVO();
 		vo = dao.read(1);
 		Assert.assertNotNull(vo);
 	}
 	
-	@Test
+	//@Test
 	public void test03update() {
 		BoardVO vo = new BoardVO();
 		vo.setBno(1);
@@ -55,15 +56,29 @@ public class BoardDaoTest {
 		dao.update(vo);
 	}
 	
-	@Test
+	//@Test
 	public void test04delete() {
 		dao.delete(2);
 	}
 	
-	@Test
+	//@Test
 	public void test05listAll() {
 		List<BoardVO> list = dao.listAll();
 		Assert.assertNotNull(list);
+	}
+	
+	//@Test
+	public void test06listPage() {
+		int page = 3;
+		dao.listPage(page);
+	}
+	
+	@Test
+	public void test07listCriteria() {
+		Criteria cri = new Criteria();
+		cri.setPage(5);
+		cri.setPerPageNum(20);
+		dao.listCriteria(cri);
 	}
 }
 
