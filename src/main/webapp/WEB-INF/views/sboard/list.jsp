@@ -42,7 +42,7 @@
 						      <c:forEach var="item" items="${list }">
 						      	<tr>
 						      		<td>${item.bno }</td>
-						      		<td><a href="${pageContext.request.contextPath}/board/readPage?bno=${item.bno}&page=${pageMaker.cri.page}">${item.title }</a></td>
+						      		<td><a href="${pageContext.request.contextPath}/sboard/readPage?bno=${item.bno}&page=${pageMaker.cri.page}&searchType=${cri.searchType }&keyword=${cri.keyword}">${item.title }</a></td>
 						      		<td>${item.writer }</td>
 						      		<td><fmt:formatDate value="${item.regdate }" pattern="yyyy-MM-dd HH:mm"/></td>  
 						      		<td><span class="badge bg-yellow">${item.viewcnt }</span></td>
@@ -55,13 +55,13 @@
 						<div class="text-center">
 							<ul class="pagination">
 							<c:if test="${pageMaker.prev }">
-								<li><a href="${pageContext.request.contextPath}/sboard/list?page=${pageMaker.startPage-1}">&laquo;</a></li>
+								<li><a href="${pageContext.request.contextPath}/sboard/list?page=${pageMaker.startPage-1}&searchType=${cri.searchType }&keyword=${cri.keyword}">&laquo;</a></li>
 							</c:if>
 								<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-									<li ${pageMaker.cri.page == idx ? 'class="active"': ''} ><a href="${pageContext.request.contextPath}/sboard/list?page=${idx}">${idx}</a></li>
+									<li ${pageMaker.cri.page == idx ? 'class="active"': ''} ><a href="${pageContext.request.contextPath}/sboard/list?page=${idx}&searchType=${cri.searchType }&keyword=${cri.keyword}">${idx}</a></li>
 								</c:forEach>
 							<c:if test="${pageMaker.next }">
-								<li><a href="${pageContext.request.contextPath}/sboard/list?page=${pageMaker.endPage+1}">&raquo;</a></li>
+								<li><a href="${pageContext.request.contextPath}/sboard/list?page=${pageMaker.endPage+1}&searchType=${cri.searchType }&keyword=${cri.keyword}">&raquo;</a></li>
 							</c:if>
 							</ul>
 						</div>

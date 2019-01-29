@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yi.domain.BoardVO;
+import com.yi.domain.Criteria;
 import com.yi.domain.PageMaker;
 import com.yi.domain.SearchCriteria;
 import com.yi.service.BoardService;
@@ -54,6 +56,14 @@ public class SearchBoardController {
 		model.addAttribute("result","success");
 		
 		return "redirect:/sboard/list";
+	}
+	
+	@RequestMapping(value="readPage", method=RequestMethod.GET)
+	public void readPage(@RequestParam("bno") int bno, SearchCriteria cri,Model model) {//주소 ?뒤에 맞는 형태로 키값이 꼭 와야함, int로 해뒀는데 String 값이 오면 에러가 남
+		BoardVO vo = service.read(bno);
+		service.updateviewCount(bno);
+		model.addAttribute("boardVO", vo);
+		model.addAttribute("cri",cri);
 	}
 	
 }
