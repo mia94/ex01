@@ -66,6 +66,14 @@ public class SearchBoardController {
 		model.addAttribute("cri",cri);
 	}
 	
+	@RequestMapping(value="removePage", method=RequestMethod.POST)
+	public String removePage(@RequestParam("bno") int bno, SearchCriteria cri) {
+		logger.info("remove ---------- post");
+		service.remove(bno);
+		System.out.println("&searchType="+cri.getSearchType()+"&keyword="+cri.getKeyword());
+		return "redirect:/sboard/list?page="+cri.getPage()+"&searchType="+cri.getSearchType()+"&keyword="+cri.getKeyword();
+	}
+	
 }
 
 
