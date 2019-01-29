@@ -97,9 +97,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="modify", method=RequestMethod.GET)
-	public void modifyGet(@RequestParam("bno") int bno, Model model) {
+	public void modifyGet(@RequestParam("bno") int bno,Criteria cri,Model model) {
 		logger.info("modify ---------- get");
 		BoardVO vo = service.read(bno);
+		model.addAttribute("cri", cri);
+		logger.info("수정 전 페이지번호"+cri.getPage()+"");
 		model.addAttribute("boardVO", vo);
 	}
 	
@@ -109,6 +111,14 @@ public class BoardController {
 		service.modify(vo);
 		logger.info(vo.toString());
 		return "redirect:/board/listAll";
+	}
+	
+	@RequestMapping(value="modifyPage", method=RequestMethod.POST)
+	public String modifyPostPage(BoardVO vo,Criteria cri) {
+		logger.info("modify ---------- post2");
+		service.modify(vo);
+		logger.info("페이지번호"+cri.getPage()+"");
+		return "redirect:/board/listPage?page="+cri.getPage();
 	}
 	
 }

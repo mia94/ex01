@@ -9,9 +9,10 @@
 						<h3 class="box-title">Board List All</h3>
 					</div>
 					<div class="box-body">
-						<form action="modify" method="post">
+						<form action="modifyPage" method="post">
 							<div class="box-body">
 								<input type="hidden" name="bno" value="${boardVO.bno }">
+								<input type="hidden" name="page" value="${cri.page }">
 								<div class="form-group">
 									<label>Title</label>
 									<input type="text" name="title" class="form-control" value="${boardVO.title }">
