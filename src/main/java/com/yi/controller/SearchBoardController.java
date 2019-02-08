@@ -90,7 +90,8 @@ public class SearchBoardController {
 		logger.info("수정 전 페이지번호"+cri.getPage()+"키워드"+cri.getSearchType()+cri.getKeyword());
 		model.addAttribute("cri", cri);
 		model.addAttribute("boardVO", vo);
-		return "redirect:/sboard/readPage?page="+cri.getPage()+"&bno="+vo.getBno()+"&searchType="+cri.getSearchType()+"&keyword="+cri.getKeyword();
+		model.addAttribute("keyword", cri.getKeyword());//cri가 들고있는 내용을 심어서 보내야한다. 객체통으로는 전달이 안됨
+		return "redirect:/sboard/readPage?page="+cri.getPage()+"&bno="+vo.getBno()+"&searchType="+cri.getSearchType();
 	}
 	
 }
