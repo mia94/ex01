@@ -189,6 +189,22 @@
 				})
 			})
 			
+			$(document).on("click",".btnDelete",function(){
+				var rno = $(this).parents(".replyLi").attr("data-rno");
+				$.ajax({
+					url:"${pageContext.request.contextPath}/replies/"+rno,
+					type:"delete",
+					dataType:"text",
+					success:function(json){
+						console.log(json);
+						if(json == "success"){
+							alert(rno+"가 삭제되었습니다.");
+						}
+						getPageList(1);
+					}
+				})
+			})
+			
 			$("#btnList").click(function(){
 				//location.href="${pageContext.request.contextPath}/board/listPage";
 				$("#f1").attr("action","list");
