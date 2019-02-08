@@ -105,7 +105,7 @@
 				{{replytext}}
 			</div>
 			<div class="timeline-footer">
-				<a class="btn btn-primary btn-xs btnModify" data-toggle="modal" data-target="#modifyModal">Modify</a>
+				<a class="btn btn-primary btn-xs btnModify" data-toggle="modal" data-target="#modifyModal" data-rno="{{rno}}">Modify</a>
 				<a class="btn btn-danger btn-xs btnDelete">Delete</a>
 			</div>
 		</div>
@@ -160,7 +160,7 @@
 	<script>
 		$(function(){
 			getPageList(1);
-			
+			//추가
 			$("#btnReplyAdd").click(function(){
 				//bno는 알아서 받아오고, replyer, replytext넘겨주기
 				var replyer = $("#newReplyWriter").val();
@@ -188,7 +188,7 @@
 					}
 				})
 			})
-			
+			//삭제
 			$(document).on("click",".btnDelete",function(){
 				var rno = $(this).parents(".replyLi").attr("data-rno");
 				$.ajax({
@@ -204,6 +204,31 @@
 					}
 				})
 			})
+			//수정
+			$("#btnReplyMod").click(function(){
+			var rno = $(this).attr("data-rno");
+			var replytext = $("#replytext").val();
+			var jsonBody = {replytext:replytext};
+			$.ajax({
+				url:"replies/"+rno,
+				type:"put",
+				headers:{
+					"Content-Type":"application/json",
+					"X-HTTP-Method-Override":"PUT"
+				},
+				data:JSON.stringify(jsonBody),
+				dataType:"text",
+				success:function(json){
+					console.log(json);
+					if(json == "success"){
+						alert(rno+"가 수정되었습니다.");
+					}
+					//수정완료되면 창 닫기
+					$("#modifyModal").hide();
+					getPageList(1);
+				}
+			})
+		})
 			
 			$("#btnList").click(function(){
 				//location.href="${pageContext.request.contextPath}/board/listPage";
