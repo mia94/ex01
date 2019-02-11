@@ -205,12 +205,19 @@
 				})
 			})
 			//수정
-			$("#btnReplyMod").click(function(){
+			$(document).on("click",".btnModify",function(){
+				var rno = $(this).attr("data-rno");
+				$("#btnReplyMod").attr("data-rno",rno);
+				var text = $(this).parent().prev().text().trim();
+				$("#replytext").val( jQuery.trim(text));
+			})
+			
+		$(document).on("click","#btnReplyMod",function(){
 			var rno = $(this).attr("data-rno");
 			var replytext = $("#replytext").val();
 			var jsonBody = {replytext:replytext};
 			$.ajax({
-				url:"replies/"+rno,
+				url:"${pageContext.request.contextPath}/replies/"+rno,
 				type:"put",
 				headers:{
 					"Content-Type":"application/json",

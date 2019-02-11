@@ -42,7 +42,10 @@
 						      <c:forEach var="item" items="${list }">
 						      	<tr>
 						      		<td>${item.bno }</td>
-						      		<td><a href="${pageContext.request.contextPath}/sboard/readPage?bno=${item.bno}&page=${pageMaker.cri.page}&searchType=${cri.searchType }&keyword=${cri.keyword}">${item.title }</a></td>
+						      		<td>
+						      		<a href="${pageContext.request.contextPath}/sboard/readPage?bno=${item.bno}&page=${pageMaker.cri.page}&searchType=${cri.searchType }&keyword=${cri.keyword}">${item.title }</a>
+						      		<strong>[${item.replycnt}]</strong>
+						      		</td>
 						      		<td>${item.writer }</td>
 						      		<td><fmt:formatDate value="${item.regdate }" pattern="yyyy-MM-dd HH:mm"/></td>  
 						      		<td><span class="badge bg-yellow">${item.viewcnt }</span></td>

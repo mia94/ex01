@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yi.domain.Criteria;
 import com.yi.domain.ReplyVO;
+import com.yi.persistence.BoardDao;
 import com.yi.persistence.ReplyDAO;
 
 @Service
@@ -14,6 +16,8 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	@Autowired
 	private ReplyDAO dao;
+	@Autowired
+	private BoardDao boardDao;
 
 	@Override
 	public List<ReplyVO> list(int bno) {
@@ -22,10 +26,11 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
+	@Transactional
 	public void create(ReplyVO vo) {
 		// TODO Auto-generated method stub
 		dao.create(vo);
-		
+		boardDao.updateReplyCnt(vo.getBno(), 1);
 	}
 
 	@Override

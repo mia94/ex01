@@ -24,4 +24,7 @@ public interface BoardDao {
 	//¼­Ä¡¿ë
 	public List<BoardVO> listSearch(SearchCriteria cri);
 	public int searchTotalCount(SearchCriteria cri);
+	
+	//´ñ±Û°¹¼ö Áõ°¡
+	public void updateReplyCnt(int bno, int amount);
 }

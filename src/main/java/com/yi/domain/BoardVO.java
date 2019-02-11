@@ -9,6 +9,7 @@ public class BoardVO {
 	private String content;
 	private Date regdate;
 	private int viewcnt;
+	private int replycnt;
 	
 	public BoardVO() {
 
@@ -21,6 +22,12 @@ public class BoardVO {
 		this.viewcnt = viewcnt;
 	}
 	
+	public int getReplycnt() {
+		return replycnt;
+	}
+	public void setReplycnt(int replycnt) {
+		this.replycnt = replycnt;
+	}
 	public int getBno() {
 		return bno;
 	}
@@ -57,13 +64,13 @@ public class BoardVO {
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
 	}
+	
 	@Override
 	public String toString() {
-		return "BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", regdate=" + regdate
-				+ ", viewcnt=" + viewcnt + "]";
+		return "BoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regdate="
+				+ regdate + ", viewcnt=" + viewcnt + ", replycnt=" + replycnt + "]";
 	}
-	
-	
-	
+
+
 	
 }
