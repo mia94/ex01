@@ -34,6 +34,12 @@
 	 <select id="totalCount" resultType="int">
 	 	select count(bno) from tbl_reply
 	 </select>
+	 
+	 <select id="selectByRno" resultType="ReplyVO">
+	 	select *
+	 	from tbl_reply
+	 	where rno=#{rno}
+	 </select>
 	
 </mapper>
 

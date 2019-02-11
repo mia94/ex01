@@ -61,7 +61,7 @@
 				</div>
 				<ul class="timeline"><!-- 댓글이 들어갈 곳 통째로 비우면 버튼까지 사라지기 때문에 조심 -->
 					<li class="time-label" id="repliesDiv">
-						<span class="bg-green">Replies List</span>
+						<span class="bg-green">Replies List[${boardVO.replycnt}]</span>
 					</li>
 				</ul>
 				<div class="text-center">
@@ -159,6 +159,7 @@
 	
 	<script>
 		$(function(){
+			
 			getPageList(1);
 			//추가
 			$("#btnReplyAdd").click(function(){
@@ -182,6 +183,7 @@
 						if(json=="success"){
 							alert("등록하였습니다.");
 							getPageList(1);
+							$(".bg-green").text("Replies List[${replyCnt}]");
 							$("#newReplyWriter").val("");
 							$("#newReplyText").val("");
 						}
@@ -257,6 +259,7 @@
 			$("#f1").attr("method","get");
 			$("#f1").submit();
 		})
+		
 		
 
 	</script>

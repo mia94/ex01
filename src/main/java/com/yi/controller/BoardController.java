@@ -71,6 +71,7 @@ public class BoardController {
 	public void read(@RequestParam("bno") int bno, Model model) {//주소 ?뒤에 맞는 형태로 키값이 꼭 와야함, int로 해뒀는데 String 값이 오면 에러가 남
 		BoardVO vo = service.read(bno);
 		service.updateviewCount(bno);
+		logger.info("==============="+vo);
 		model.addAttribute("boardVO", vo);
 	}
 	

@@ -42,7 +42,12 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public void delete(int rno) {
 		// TODO Auto-generated method stub
+		
+		//rno를 이용하여 bno를 가져오기,가져온 후에 삭제를 해야 에러가 나지 않음
+		ReplyVO vo = new ReplyVO();
+		vo = dao.selectByRno(rno);
 		dao.delete(rno);
+		boardDao.updateReplyCnt(vo.getBno(), -1);
 	}
 
 	@Override

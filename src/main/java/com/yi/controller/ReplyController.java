@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yi.domain.BoardVO;
 import com.yi.domain.Criteria;
 import com.yi.domain.PageMaker;
 import com.yi.domain.ReplyVO;
+import com.yi.service.BoardService;
 import com.yi.service.ReplyService;
 
 @RestController
@@ -28,6 +30,8 @@ public class ReplyController {
 	
 	@Autowired
 	private ReplyService service;
+	@Autowired
+	private BoardService boardService;
 	
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public ResponseEntity<String> register(@RequestBody ReplyVO vo){
@@ -75,6 +79,9 @@ public class ReplyController {
 			//페이지정보
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
+			//board정보
+			BoardVO board = new BoardVO();
+			board = boardService.read(bno);
 			
 			int count = service.totalCount(bno);
 			pageMaker.setTotalCount(count);
@@ -82,6 +89,8 @@ public class ReplyController {
 			HashMap<String, Object> map = new HashMap<>();
 			map.put("list", list);
 			map.put("pageMaker", pageMaker);
+			//댓글갯수 가져오기
+			map.put("replyCnt",board.getReplycnt());
 			//정상적으로 되면 ok가 나올것
 			entity = new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 		} catch (Exception e) {

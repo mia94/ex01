@@ -59,4 +59,10 @@ public class ReplyDAOImpl implements ReplyDAO {
 		return sqlSession.selectOne(namespace+".totalCount", bno);
 	}
 
+	@Override
+	public ReplyVO selectByRno(int rno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".selectByRno", rno);
+	}
+
 }
