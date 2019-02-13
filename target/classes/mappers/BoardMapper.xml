@@ -98,6 +98,11 @@
 	 	set replycnt = replycnt + #{amount}
 	 	where bno=#{bno}
 	 </update>
+	 
+	 <insert id="addAttach">
+	 	insert into tbl_attach(fullname, bno) 
+	 	value (#{fullname}, LAST_INSERT_ID())
+	 </insert>
 	
 </mapper>
 

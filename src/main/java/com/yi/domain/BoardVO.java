@@ -2,6 +2,7 @@ package com.yi.domain;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class BoardVO {
 	private int bno;
@@ -11,7 +12,7 @@ public class BoardVO {
 	private Date regdate;
 	private int viewcnt;
 	private int replycnt;
-	private String[] files;//梅何颇老
+	private List<String> files;//梅何颇老
 	
 	public BoardVO() {
 
@@ -24,10 +25,11 @@ public class BoardVO {
 		this.viewcnt = viewcnt;
 	}
 	
-	public String[] getFiles() {
+	
+	public List<String> getFiles() {
 		return files;
 	}
-	public void setFiles(String[] files) {
+	public void setFiles(List<String> files) {
 		this.files = files;
 	}
 	public int getReplycnt() {
@@ -72,13 +74,13 @@ public class BoardVO {
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
 	}
-	
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regdate="
-				+ regdate + ", viewcnt=" + viewcnt + ", replycnt=" + replycnt + ", files=" + Arrays.toString(files)
-				+ "]";
+				+ regdate + ", viewcnt=" + viewcnt + ", replycnt=" + replycnt + ", files=" + files + "]";
 	}
+	
+	
 	
 	
 

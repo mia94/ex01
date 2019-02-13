@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yi.domain.BoardVO;
 import com.yi.domain.Criteria;
@@ -49,8 +50,10 @@ public class SearchBoardController {
 	}
 	
 	@RequestMapping(value="register",method=RequestMethod.POST)
-	public String registerPost(BoardVO vo, Model model) {
+	public String registerPost(BoardVO vo,MultipartFile imageFiles, Model model) {
 		logger.info("register -------- post");
+		logger.info("filename : " + imageFiles.getOriginalFilename());
+		logger.info("filesize : " + imageFiles.getSize());
 		
 		service.regist(vo);
 		model.addAttribute("result","success");

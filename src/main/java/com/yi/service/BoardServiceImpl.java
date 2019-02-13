@@ -20,6 +20,16 @@ public class BoardServiceImpl implements BoardService {//서비스는@Service달기, D
 	public void regist(BoardVO vo) {
 		// TODO Auto-generated method stub
 		dao.insert(vo);
+		
+		List<String> files =vo.getFiles();//string[]형태
+		
+		if(files==null || files.size() == 0) {
+			return;
+		}
+		for(String fullname : files) {
+			dao.addAttach(fullname);
+		}
+
 	}
 
 	@Override

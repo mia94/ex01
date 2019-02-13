@@ -27,4 +27,22 @@ public interface BoardDao {
 	
 	//댓글갯수 증가
 	public void updateReplyCnt(int bno, int amount);
+	
+	//파일업로드
+	public void addAttach(String fullname);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

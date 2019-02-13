@@ -100,4 +100,10 @@ public class BoardDaoImpl implements BoardDao {
 		sqlSession.update(namespace+".updateReplyCnt", map);
 	}
 
+	@Override
+	public void addAttach(String fullname) {
+		// TODO Auto-generated method stub
+		sqlSession.insert(namespace+".addAttach",fullname);
+	}
+
 }
