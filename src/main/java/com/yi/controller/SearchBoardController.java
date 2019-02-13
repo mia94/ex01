@@ -1,7 +1,10 @@
 package com.yi.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -18,6 +21,7 @@ import com.yi.domain.Criteria;
 import com.yi.domain.PageMaker;
 import com.yi.domain.SearchCriteria;
 import com.yi.service.BoardService;
+import com.yi.util.UploadFileUtils;
 
 @Controller
 @RequestMapping("/sboard/*")
@@ -27,6 +31,9 @@ public class SearchBoardController {
 	
 	@Inject //자바에서 나온 주입방식, autowired는 spring에서 나온 주입방식, 활용은 같음
 	private BoardService service;
+	//기본형은 주입받으려면 servlet-context에 등록된 이름으로 주입
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	
 	//sboard/list?page=10
 	@RequestMapping(value="list", method=RequestMethod.GET)
@@ -50,10 +57,18 @@ public class SearchBoardController {
 	}
 	
 	@RequestMapping(value="register",method=RequestMethod.POST)
-	public String registerPost(BoardVO vo,MultipartFile imageFiles, Model model) {
+	public String registerPost(BoardVO vo,List<MultipartFile> imageFiles, Model model) throws IOException {
 		logger.info("register -------- post");
-		logger.info("filename : " + imageFiles.getOriginalFilename());
-		logger.info("filesize : " + imageFiles.getSize());
+		List<String> files = new ArrayList<>();
+		for(MultipartFile file : imageFiles) {
+			logger.info("filename : " + file.getOriginalFilename());
+			logger.info("filesize : " + file.getSize());
+			
+			String thumPath = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+			
+			files.add(thumPath);
+		}
+		vo.setFiles(files);
 		
 		service.regist(vo);
 		model.addAttribute("result","success");

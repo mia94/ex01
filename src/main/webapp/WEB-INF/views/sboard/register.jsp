@@ -25,7 +25,7 @@
 								</div>
 								<div class="form-group"> 
 									<label>Image File</label>
-									<input type="file" name="imageFiles" class="form-control" placeholder="이미지를 선택하세요">
+									<input type="file" name="imageFiles" class="form-control" placeholder="이미지를 선택하세요" multiple="multiple">
 								</div>
 							</div>
 							<div class="box-footer">

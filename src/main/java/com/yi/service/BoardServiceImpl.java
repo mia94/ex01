@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yi.domain.BoardVO;
 import com.yi.domain.Criteria;
@@ -17,6 +18,7 @@ public class BoardServiceImpl implements BoardService {//서비스는@Service달기, D
 	private BoardDao dao;
 
 	@Override
+	@Transactional
 	public void regist(BoardVO vo) {
 		// TODO Auto-generated method stub
 		dao.insert(vo);
